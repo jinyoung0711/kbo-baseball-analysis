@@ -15,6 +15,24 @@ KBO 리그 투수들의 성적에 영향을 미치는 요인을 분석하는 프
     - 📁 `plus.csv`: 추가 성적 지표 데이터
   - 📜 `baseball_code.ipynb`: 데이터 수집, 전처리 및 분석 코드
 
+## 🔧 환경 설정
+아래 패키지를 설치하면 데이터 수집 스크립트를 실행할 수 있습니다.
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows의 경우 .venv\Scripts\activate
+pip install pandas requests beautifulsoup4
+```
+
+## 🔁 데이터 갱신 자동화
+`scripts/update_data.py` CLI를 사용하면 여러 시즌의 투수 데이터를 한 번에 내려받고 CSV로 저장할 수 있습니다.
+
+```bash
+python scripts/update_data.py --start-year 2018 --end-year 2023
+```
+
+기본 저장 경로는 `baseball_data/`이며, `--output-dir` 옵션으로 변경할 수 있습니다. cron 등 스케줄러에 위 명령을 등록해 두면 주기적으로 데이터를 갱신할 수 있습니다.
+
 ## 🎯 분석 목표
 1. 🏟️ 구장별 특성이 투수 성적에 미치는 영향을 분석합니다.
 2. 📉 WHIP과 파크팩터 간의 상관관계를 탐색합니다.
