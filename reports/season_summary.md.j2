@@ -1,0 +1,35 @@
+# KBO Season Analysis Summary
+
+Generated on {{ generated_on }}
+
+## Dataset Overview
+- Source file: {{ data_source }}
+- Samples: {{ sample_count }}
+- Features used: {{ feature_count }}
+
+## Model Performance
+| Metric | Value |
+| ------ | -----:|
+{% for metric, value in metrics.items() %}| {{ metric }} | {{ '%.4f' | format(value) }} |
+{% endfor %}
+
+{% if cv_scores %}
+### Cross-Validation
+- Splits: {{ cv_scores|length }}
+- Mean R²: {{ '%.4f' | format(cv_scores|sum / cv_scores|length) }}
+- Scores: {{ cv_scores|join(', ') }}
+{% endif %}
+
+## Visual Diagnostics
+The following figures are generated as part of the automated pipeline. They
+provide insight into the relationships between variables and model behaviour.
+
+1. **Correlation Matrix** – `{{ correlation_path }}`
+2. **Residual Plot** – `{{ residuals_path }}`
+3. **Feature Importance** – `{{ feature_importance_path }}`
+
+Embed or link these plots in downstream reports or dashboards as needed.
+
+## Key Takeaways
+- Top features: {{ top_features|join(', ') if top_features else 'N/A' }}
+- Notes: {{ notes or 'Add analyst commentary here.' }}
